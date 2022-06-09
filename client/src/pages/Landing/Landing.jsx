@@ -1,12 +1,12 @@
 import React from "react";
-import Card from "../../components/Card/Card";
+import Presentacion from "../../components/Presentacion/Presentacion";
 import './Landing.scss'
 
 
 export default function Landing(params) {
   return (
     <div className="Landing">
-      <Card/>
+      <Presentacion/>
     </div>
   );
 }

@@ -1,0 +1,49 @@
+
+header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: rgb(0, 0, 0);
+}
+
+ul, nav{
+  list-style: none;
+  padding: 0;
+}
+
+header nav ul {
+  display: flex;
+  margin-left: 1rem;
+}
+
+header nav li:last-child{
+  margin-right: 10px;
+}
+
+.NavBar {
+  display: flex;
+  align-items: baseline;
+  margin-left: 1rem;
+}
+
+.NavBar a {
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.NavBar a:hover {
+  opacity: 1;
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+}
+
+.NavBar  li {
+  margin-left: 0.5em;
+}

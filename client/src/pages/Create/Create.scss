@@ -1,0 +1,10 @@
+.CreatePokemonPage {
+  display: flex;
+  align-content: center;
+  background: linear-gradient(to right, #aa4b6b, #6b6b83, #3b8d99);
+  width: 100vw;
+  min-height: 100vh;
+}
+
+.CreatePokemonPage button:hover{transform: translatey(2px);}
+.CreatePokemonPage button:active{transform: translatey(5px);}

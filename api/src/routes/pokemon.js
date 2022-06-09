@@ -17,9 +17,13 @@ async function consultas(params) {
 router.get('/', async (req, res, next) => {
   const { name } = req.query;
   if (name) return next();
-  let pokemones = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=40');
-  let salida = await consultas(pokemones);
-  res.json(salida);
+  try {
+    let pokemones = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=40');
+    let salida = await consultas(pokemones);
+    res.json(salida);
+  } catch (error) {
+    res.status(500).send('Error en el servidor '+error);   
+  }
 });
 
 router.get('/:idPokemon', async (req, res, next) => {
@@ -28,14 +32,18 @@ router.get('/:idPokemon', async (req, res, next) => {
   if (isNaN(parseInt(idPokemon))) { return res.status(400).send('Formato invalido'); }
   if (idPokemon[0] === '0') {
     idPokemon = parseInt(idPokemon);
-    let pokemon = await Pokemon.findByPk(idPokemon, {
-      include : {
-        model: Tipo,
-        through: { attributes: [] }
-      }
-    });
-    if (!pokemon) return res.status(400).send('Pokemon no encontrado')
-    return res.status(200).json(pokemon);
+    try {
+      let pokemon = await Pokemon.findByPk(idPokemon, {
+        include : {
+          model: Tipo,
+          through: { attributes: [] }
+        }
+      });
+      if (!pokemon) return res.status(400).send('Pokemon no encontrado')
+      return res.status(200).json(pokemon);
+    } catch (error) {
+      return res.status(500).json('Error en el servidor ' + error);
+    }
   }
   try {
     let pokemon = await axios.get(`https://pokeapi.co/api/v2/pokemon/${idPokemon}`);
