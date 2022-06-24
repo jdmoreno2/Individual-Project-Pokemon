@@ -9,4 +9,27 @@
   overflow: hidden;
   height: 100vh;
   overflow-y: scroll;
+
+  .Opcions {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+  }
+
+  .Alerta{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .Home {
+    .Opcions{
+      display: block;
+    }
+  }
 }

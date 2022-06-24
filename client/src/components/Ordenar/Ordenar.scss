@@ -1,0 +1,85 @@
+.options {
+  position: relative;
+  color: #ddd;
+  font-family: 'Open Sans', sans-serif;
+  text-align: center;
+  margin: 0 1rem;
+
+  input {
+    display: none;
+  }
+
+  h3 {
+    margin: 1rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .Titulos {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-around;
+  }
+
+  .titulo{
+    margin: 0;
+    padding: 0;
+  }
+
+  // .options > label
+  >label {
+    display: inline-block;
+    position: relative;
+    margin-right: 1.5em;
+    padding-left: 1.5em;
+    cursor: pointer;
+
+    // .options > label:before
+    // this creates the outer circle for faux radio button
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      left: 0;
+      top: 50%;
+      margin-top: -8px;
+      border: 1px solid #fff;
+      border-radius: 8px;
+    }
+
+    // .options > label:after
+    // this creates the inner circle for active faux radio button
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 0;
+      height: 0;
+      top: 50%;
+      left: 8px;
+      margin-top: 0;
+      background: #fff;
+      border-radius: 4px;
+      transition: .2s ease-in-out;
+    }
+  }
+
+  // .options :checked + label:after
+  :checked+label {
+    &:after {
+      height: 8px;
+      width: 8px;
+      margin-top: -3px;
+      left: 5px;
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .options {
+    
+  }
+}

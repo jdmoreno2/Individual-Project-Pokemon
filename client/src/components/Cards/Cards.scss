@@ -1,6 +1,17 @@
-.cards{
+.cards {
   display: flex;
   flex-wrap: wrap;
-  align-content: space-between;
+  align-content: center;
   justify-content: space-around;
+  flex-direction: column;
+  
+  .card {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+  }
+
+  
+
 }

@@ -1,0 +1,58 @@
+.Filtro {
+  position: relative;
+  color: #ddd;
+  font-family: 'Open Sans', sans-serif;
+  text-align: center;
+  margin: 0 1rem;
+
+  h3 {
+    margin: 1rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .Titulos {
+    display: inline-block;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-around;
+    margin: 0 10px;
+
+    .titulo {
+      margin: 0;
+      margin-right: 1rem;
+      padding: 0;
+    }
+  }
+
+  input {
+    outline: 1px solid #fff;
+    margin-right: 13px;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    background: #eee;
+  }
+
+  select {
+    max-width: 100px;
+    display: inline-block;
+    border-radius: 7px;
+    background: #eee;
+    padding: 5px;
+    outline: none;
+    border: none;
+    color: #222;
+    transition: 0.3s linear;
+    margin: 1em;
+  }
+
+  >label {
+    display: inline-block;
+    position: relative;
+    margin-right: 1.5em;
+    padding-left: 1.5em;
+    cursor: pointer;
+  }
+}

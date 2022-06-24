@@ -1,0 +1,23 @@
+ul.pagination {
+  display: inline-block;
+  margin: auto;
+  margin-bottom: 1rem;
+
+  li {
+    display: inline;
+    color: #fff;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+  }
+  li.active {
+    background-color: #4eb7c7;
+    color: #fff;
+  }
+
+  li:hover:not(.active) {
+    background-color: #ff7da8;
+    color: rgb(0, 0, 0);
+  }
+
+}

@@ -1,0 +1,53 @@
+.Alert {
+  .Alert-dangerous {
+    padding: 20px;
+    background-color: #f8d7da;
+    color: #842029;
+    margin-bottom: 15px;
+    border:  1px solid #f39ba4;
+    border-radius: 5px;
+  }
+
+  .Alert-success {
+    padding: 20px;
+    background-color: #d1e7dd;
+    color: #0f5132;
+    margin-bottom: 15px;
+    border:  1px solid #7ad8ae;
+    border-radius: 5px;
+  }
+
+  .Alert-info {
+    padding: 20px;
+    background-color: #2196F3;
+    color: #084298; 
+    border: 1px solid #86b8fe;
+    border-radius: 5px;
+    margin-bottom: 15px;
+  }
+
+  .Alert-warning {
+    padding: 20px;
+    background-color: #fff3cd;
+    color: #664d03; 
+    border: 1px solid #ffdf7d;
+    border-radius: 5px;
+    margin-bottom: 15px;
+  }
+
+  .closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .closebtn:hover {
+    color: black;
+  }
+
+}

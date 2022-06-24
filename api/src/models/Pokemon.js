@@ -35,6 +35,9 @@ module.exports = (sequelize) => {
     },
     peso: {
       type: DataTypes.INTEGER
+    },
+    imagen: {
+      type: DataTypes.STRING
     }
   },
   {

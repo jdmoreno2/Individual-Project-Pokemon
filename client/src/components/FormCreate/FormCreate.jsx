@@ -1,41 +1,11 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import Alert from '../Alert/Alert';
 import './FormCreate.scss'
 
-// function validate(input) {
-//   let errors = {};
-//   if (!input.nombre) {
-//     errors.nombre = 'Se requiere Nombre';
-//   } else if (!/\S+@\S+\.\S+/.test(input.nombre)) {
-//     errors.nombre = 'Nombre invalido';
-//   }
-//   if (!input.vida) {
-//     errors.vida = 'Se requiere Vida';
-//   } else if (!/^[0-9]$/.test(input.vida)) {
-//     errors.vida = 'Campo invalido';
-//   }
-//   return errors;
-// };
-
-function validate(input, e) {
-  let errors = {};
-  console.log(e)
-  if (e === 'nombre') {
-    if (!input[e]) {
-      errors[e] = 'Se requiere Nombre';
-    } else if (!/^\s+$/.test(input[e])) {
-      errors[e] = 'Nombre invalido';
-    }
-  } else {
-    if (!input[e]) {
-      errors[e] = 'Se requiere ' + e;
-    } else if (!/^\s+$/.test(input[e])) {
-      errors[e] = 'Solo se permiten numeros';
-    }
-  }
-  return errors;
-};
 
 export default function Form({ onSubmit }) {
+  const tipos = useSelector((state) => state.tipos);
   const [input, setInput] = useState({
     nombre: '',
     vida: '',
@@ -44,51 +14,158 @@ export default function Form({ onSubmit }) {
     velocidad: '',
     altura: '',
     peso: '',
-    tipo: ''
+    tipo: [],
+    imagen: ''
   });
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({
+    nombre: '',
+    vida: '',
+    fuerza: '',
+    defensa: '',
+    velocidad: '',
+    altura: '',
+    peso: '',
+    tipo: '',
+    imagen: ''
+  });
+  const [alert, setAlert] = useState('');
+
+  function validate(input, e) {
+    let error = errors;
+    if (e === 'nombre') {
+      if (!input[e]) {
+        error[e] = '¡Se requiere Nombre!';
+      } else if (!/[a-zA-Z]+$/.test(input[e])) {
+        error[e] = '¡Nombre invalido!';
+      } else {
+        error[e] = '';
+      }
+    } else {
+      if (!input[e]) {
+        error[e] = 'Se requiere ' + e;
+      } else if (!/^[0-9]+$/.test(input[e])) {
+        error[e] = 'Solo se permiten numeros';
+      } else if (input[e] > 200) {
+        error[e] = 'El valor ingresado no debe ser mayor a 200';
+      } else {
+        error[e] = '';
+      }
+    }
+    return error;
+  };
 
   const handleErrors = function (e) {
     setErrors(validate({
       ...input,
       [e.target.name]: e.target.value
     }, e.target.name));
+    if (errors[e.target.name] === '') return true
+    return false
+  }
+
+  const onHandledChange = (e) => {
+    const campo = e.target.name;
+    const value = e.target.value;
+    if (campo === 'tipo') {
+      setInput({
+        ...input,
+        tipo: input.tipo.find(t => t === parseInt(value)) ? input.tipo.filter(t => t !== parseInt(value)) : input.tipo.concat(parseInt(value))
+      });
+    } else if (campo === 'imagen') {
+      console.log()
+      setInput({
+        ...input,
+        [campo]: e.target.files[0]
+      });
+    } else {
+      handleErrors(e)
+      setInput({
+        ...input,
+        [campo]: value
+      });
+    }
   }
 
   const onSubmit2 = (e) => {
     e.preventDefault();
-    onSubmit(input);
-    console.log(input);
+    const formData = new FormData(e.target);
+    setAlert('Hola');
+    console.log(alert)
+    console.log('Aqui')
+    const { nombre, vida, fuerza, defensa, velocidad, altura, peso, tipo, imagen } = input;
+    if (nombre != '' && vida !== '' && fuerza !== '' && defensa !== ''
+      && velocidad !== '' && altura !== '' && peso !== '' && tipo.length != 0 && imagen !== '') {
+        if (onSubmit(formData)) {
+          setAlert(<Alert message={'Pokemon Creado'} type={'success'} />)
+          setInput({
+            nombre: '',
+            vida: '',
+            fuerza: '',
+            defensa: '',
+            velocidad: '',
+            altura: '',
+            peso: '',
+            tipo: '',
+            imagen: ''
+          });
+          e.target.reset();
+        } else {
+          setAlert(<Alert message={'Error no se pudo crear el pokemon'} type={'dangerous'} />)
+        }
+    }else{
+      setAlert(<Alert message={'Se deben llenar todos los campos'} type={'warning'} />)
+    }
   }
-  const onHandledChange = (e) => {
-    handleErrors(e);
-    setInput({
-      ...input,
-      [e.target.name]: e.target.value
-    });
-  }
+
   return (
     <div className="CreatePokemon">
       <h1>Crear Pokemon</h1>
-      <form onSubmit={(e) => onSubmit2(e)}>
-        <input type="text" name="nombre" placeholder='Ingrese Nombre' value={input.nombre} onChange={(e) => onHandledChange(e)} />
-        <small>{errors.nombre}</small>
-        <input type="number" name="vida" placeholder='Ingrese Vida' value={input.vida} onChange={(e) => onHandledChange(e)} />
-        <span>{errors.vida}</span>
-        <input type="number" name="fuerza" placeholder='Ingrese Fuerza' value={input.fuerza} onChange={(e) => onHandledChange(e)} />
-        <span>{errors.fuerza}</span>
-        <input type="number" name="defensa" placeholder='Ingrese Defenza' value={input.defensa} onChange={(e) => onHandledChange(e)} />
-        <span>{errors.defensa}</span>
-        <input type="number" name="velocidad" placeholder='Ingrese Velocidad' value={input.velocidad} onChange={(e) => onHandledChange(e)} />
-        <span>{errors.velocidad}</span>
-        <input type="number" name="altura" placeholder='Ingrese Altura' value={input.altura} onChange={(e) => onHandledChange(e)} />
-        <span>{errors.altura}</span>
-        <input type="number" name="peso" placeholder='Ingrese Peso' value={input.peso} onChange={(e) => onHandledChange(e)} />
-        <span>{errors.peso}</span>
-        <select type="text" name="select" placeholder='Seleccione Tipo' value={input.tipo} onChange={(e) => onHandledChange(e)} multiple >
-
-        </select>
-        <span>{errors.tipo}</span>
+      {
+        alert
+      }
+      <form onSubmit={(e) => onSubmit2(e)} encType='multipart/form-data' name='create'>
+        <div className='input'>
+          <input type="text" name="nombre" placeholder='Ingrese Nombre' value={input.nombre} onChange={(e) => onHandledChange(e)} />
+          <small>{errors.nombre}</small>
+        </div>
+        <div className='input'>
+          <input type="number" name="vida" placeholder='Ingrese Vida' value={input.vida} onChange={(e) => onHandledChange(e)} />
+          <small>{errors.vida}</small>
+        </div>
+        <div className='input'>
+          <input type="number" name="fuerza" placeholder='Ingrese Fuerza' value={input.fuerza} onChange={(e) => onHandledChange(e)} />
+          <small>{errors.fuerza}</small>
+        </div>
+        <div className='input'>
+          <input type="number" name="defensa" placeholder='Ingrese Defenza' value={input.defensa} onChange={(e) => onHandledChange(e)} />
+          <small>{errors.defensa}</small>
+        </div>
+        <div className='input'>
+          <input type="number" name="velocidad" placeholder='Ingrese Velocidad' value={input.velocidad} onChange={(e) => onHandledChange(e)} />
+          <small>{errors.velocidad}</small>
+        </div>
+        <div className='input'>
+          <input type="number" name="altura" placeholder='Ingrese Altura' value={input.altura} onChange={(e) => onHandledChange(e)} />
+          <small>{errors.altura}</small>
+        </div>
+        <div className='input'>
+          <input type="number" name="peso" placeholder='Ingrese Peso' value={input.peso} onChange={(e) => onHandledChange(e)} />
+          <small>{errors.peso}</small>
+        </div>
+        <div className='input'>
+          <input type="file" name="imagen" placeholder='Ingrese imagen' onChange={(e) => onHandledChange(e)} />
+          <small>{errors.imagen}</small>
+        </div>
+        <div className='input'>
+          <select name="tipo" id="tipo" placeholder='Seleccione Tipo' value={input.tipo} onChange={(e) => onHandledChange(e)} multiple >
+            {
+              tipos.map(tipo => {
+                return <option key={tipo.id} className='Opcion' value={tipo.id}>{tipo.nombre}</option>
+              })
+            }
+          </select>
+          <small>{errors.tipo}</small>
+        </div>
         <div>
           <button>Crear</button>
         </div>

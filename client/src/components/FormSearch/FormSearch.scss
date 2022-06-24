@@ -1,53 +1,69 @@
-.cover  {
+.cover {
   margin-top: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+
+  .flex-form {
+    display: flex;
+    z-index: 10;
+    position: relative;
+    width: 400px;
+    box-shadow: 4px 8px 16px rgba(0, 0, 0, 0.3);
+  }
+
+  .flex-form>* {
+    border: 0;
+    padding: 0 0 0 10px;
+    background: #fff;
+    line-height: 50px;
+    font-size: 1rem;
+    border-radius: 0;
+    outline: 0;
+  }
+
+  .flex-form input[type="submit"] {
+    background: #ef3f5a;
+    border: 1px solid #ef3f5a;
+    color: #fff;
+    padding: 0 30px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  input[type="search"] {
+    flex-basis: 500px;
+  }
+
+  input[type="submit"] {
+    color: #fff;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    transition: all 0.2s;
+  }
+
+  input[type="submit"]:hover {
+    background: #d73851;
+    border: 1px solid #ff0026;
+    color: #fff;
+  }
+
+  .Error{
+    color: #ff0026;
+  }
 }
 
-.flex-form {
-  display: flex;
-  z-index: 10;
-  position: relative;
-  width: 400px;
-  box-shadow: 4px 8px 16px rgba(0, 0, 0, 0.3);
-}
+@media only screen and (max-width: 500px) {
+  .cover {
+    .flex-form {
+      width: auto;
+    }
 
-.flex-form > * {
-  border: 0;
-  padding: 0 0 0 10px;
-  background: #fff;
-  line-height: 50px;
-  font-size: 1rem;
-  border-radius: 0;
-  outline: 0;
-}
-
-.flex-form input[type="button"] {
-  background: #ef3f5a;
-  border: 1px solid #ef3f5a;
-  color: #fff;
-  padding: 0 30px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-input[type="search"] {
-  flex-basis: 500px;
-}
-
-input[type="button"] {
-  color: #fff;
-  padding: 10px;
-  border: 1px solid rgba(255,255,255,0.5);
-  -webkit-transition: all 0.2s;
-  -moz-transition: all 0.2s;
-  transition: all 0.2s;
-}
-
-input[type="button"]:hover {
-  background: #d73851;
-  border: 1px solid #ff0026;
-  color: #fff;
+    .flex-form input[type="submit"] {
+      padding: 0 15px;
+    }
+  }
 }

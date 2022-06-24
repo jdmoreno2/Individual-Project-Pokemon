@@ -46,22 +46,22 @@ export function createPokemon(payload) {
   }
 }
 
-// export function getTipos(payload) {
-//   return {
-//     type : GET_TIPOS,
-//     payload
-//   }
-// }
-
-export function getTipos() {
-  return function(dispatch) {
-    return fetch('http://localhost:3001/types')
-    .then(response => response.json())
-    .then(json => {
-      dispatch({
-        type: GET_POKEMONS,
-        payload: json
-      })
-    });
+export function getTipos(payload) {
+  return {
+    type : GET_TIPOS,
+    payload
   }
 }
+
+// export function getTipos() {
+//   return function(dispatch) {
+//     return fetch('http://localhost:3001/types')
+//     .then(response => response.json())
+//     .then(json => {
+//       dispatch({
+//         type: GET_POKEMONS,
+//         payload: json
+//       })
+//     });
+//   }
+// }

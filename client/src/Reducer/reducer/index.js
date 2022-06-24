@@ -3,8 +3,7 @@ import { CREATE_POKEMON, GET_POKEMONS, GET_POKEMON_BY_NAME, GET_POKEMON_DETAILS,
 const initialState = {
   pokemonsLoaded: [],
   tipos: [],
-  pokemonDetail: {},
-  pokemonSearch: {}
+  pokemonDetail: {}
 }
 
 function rootReducer(state = initialState, action) {
@@ -12,7 +11,7 @@ function rootReducer(state = initialState, action) {
     case CREATE_POKEMON:
       return {
         ...state,
-        pokemonsLoaded: state.pokemonsLoades.concat(action.payload)
+        pokemonsLoaded: state.pokemonsLoaded.concat([action.payload])
       }
     case GET_POKEMONS:
       return {
@@ -22,7 +21,7 @@ function rootReducer(state = initialState, action) {
     case GET_POKEMON_BY_NAME:
       return {
         ...state,
-        pokemonSearch: action.payload
+        pokemonsLoaded: action.payload
       }
     case GET_POKEMON_DETAILS:
       return {

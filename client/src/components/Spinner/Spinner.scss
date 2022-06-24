@@ -1,0 +1,36 @@
+.Spinner {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+
+  .spinner {
+    width: 6rem;
+    height: 6rem;
+    display: inline-block;
+    border: 8px solid #cc00ff;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    animation: spin 2s infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0);
+    }
+
+    50% {
+      transform: rotate(180deg);
+      border-top-color: #fc4182;
+      border-bottom-color: #80ffdb;
+      border-right-color: transparent;
+      border-left-color: transparent;
+    }
+
+    100% {
+      transform: rotate(180deg);
+    }
+  }
+}

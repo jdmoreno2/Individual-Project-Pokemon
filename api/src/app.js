@@ -2,8 +2,9 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const path = require('path');
 const routes = require('./routes/index.js');
-
+const storage = require('./libs/storage');
 require('./db.js');
 
 const server = express();
@@ -21,6 +22,9 @@ server.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   next();
 });
+
+// Static File
+server.use(express.static( path.join(__dirname, 'public') ));
 
 server.use('/', routes);
 

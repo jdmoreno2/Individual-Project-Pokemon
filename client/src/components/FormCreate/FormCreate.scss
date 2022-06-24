@@ -1,63 +1,97 @@
-
 .CreatePokemon {
   // display: flex;
-  margin: 4em auto ;
-  box-shadow: 0 15px 30px 1px rgba(252, 252, 252, 0.477);
+  margin: 4em auto;
+  box-shadow: 0 15px 30px 1px rgba(0, 0, 0, 0.477);
   text-align: center;
   border-radius: 5px;
   background: rgba(255, 255, 255, 0.95);
   padding: 1em;
   width: auto;
   max-width: 600px;
-  height: auto;
+  // height: auto;
   position: absolute;
   // bottom: 0;
   right: 0;
   left: 0;
   top: 0;
+
+  h1 {
+    background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    font-family: 'Playfair Display', serif;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    // letter-spacing: 1.8px;
+    font-size: 3.5rem;
+    margin: 0;
+  }
+
+  .input {
+    display: inline-grid;
+    align-items: baseline;
+
+    >small {
+      color: #f64f59;
+    }
+  }
+
+  input {
+    background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
+    max-width: 210px;
+    display: inline-block;
+    border-radius: 7px;
+    background: #eee;
+    padding: 1em 2em;
+    outline: none;
+    border: none;
+    color: #222;
+    transition: 0.3s linear;
+    margin: 1em;
+  }
+
+  input[type="file" i] {
+    border: none;
+  }
+  select {
+    background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
+    max-width: 210px;
+    width: 210px;
+    display: inline-block;
+    border-radius: 7px;
+    background: #eee;
+    padding: 1em 2em;
+    outline: none;
+    border: none;
+    color: #222;
+    transition: 0.3s linear;
+    margin: 1em;
+  }
+
+  button {
+    display: inline-block;
+    background-image: linear-gradient(to left, rgba(255, 146, 202, 0.75) 0%, rgba(145, 149, 251, 0.86) 100%);
+    box-shadow: 0 9px 25px -5px #df91fb;
+    font-family: 'Abel', sans-serif;
+    padding: 0.5em 1.9em;
+    margin: 1em;
+    border-radius: 7px;
+    width: 10em;
+    font-size: 1.4em;
+    cursor: pointer;
+    color: #FFFFFF;
+    font-size: 1em;
+    outline: none;
+    border: none;
+    transition: 0.3s linear;
+  }
 }
 
-.CreatePokemon h1 {
-  background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-  font-family: 'Playfair Display', serif;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  // letter-spacing: 1.8px;
-  font-size: 3.5rem;
-  margin: 0;
-}
-
-.CreatePokemon input {
-  background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
-  max-width: 210px;
-	display: inline-block;
-	border-radius: 7px;
-	background: #eee;
-	padding: 1em 2em;
-	outline: none;
-	border: none;
-	color: #222;
-	transition: 0.3s linear;
-  margin: 1em;
-}
-
-.CreatePokemon button {
-  display: inline-block;
-	background-image: linear-gradient(to left, rgba(255, 146, 202, 0.75) 0%, rgba(145, 149, 251, 0.86) 100%);
-	box-shadow: 0 9px 25px -5px #df91fb;
-	font-family: 'Abel', sans-serif;
-	padding: 0.5em 1.9em;
-	margin: 1em;
-	border-radius: 7px;
-  width: 10em;
-	font-size: 1.4em;
-	cursor: pointer;
-	color: #FFFFFF;
-	font-size: 1em;
-	outline: none;
-	border: none;
-	transition: 0.3s linear;
+@media only screen and (max-width: 500px) {
+  .CreatePokemon{
+    width: 80vw;
+    position: relative;
+    height: auto;
+  }
 }
