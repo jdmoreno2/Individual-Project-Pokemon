@@ -15,11 +15,18 @@ export default function Home(props) {
   const dispatch = useDispatch();
   const pokemons = useSelector((state) => state.pokemonsLoaded);
   const [pokemones, setPokemones] = useState([]);
-  const [alert, setAlert] = useState({ Loading: false, Alert: false });
+  const [alert, setAlert] = useState({ Loading: false, Alert: '' });
+
   async function get(url) {
     try {
-      const poke = await axios.get(url);
-      return poke.data;
+      const poke = await axios.get(url).catch(e => {
+        console.log(e.message)
+      });
+      if (poke) {
+        return poke.data;
+      } else {
+        return undefined;
+      }
     } catch (error) {
       console.log('Error: ' + error)
     }
@@ -27,10 +34,19 @@ export default function Home(props) {
 
   const Carga = async () => {
     setAlert({ ...alert, Loading: true });
-    dispatch(getPokemons(await get('http://localhost:3001/pokemons')));
-    dispatch(getTipos(await get('http://localhost:3001/types')));
-    setAlert({ ...alert, Loading: false });
-    console.log('Cargados')
+    const pokemons = await get('http://localhost:3001/pokemons');
+    const tipos = await get('http://localhost:3001/types');
+    if (pokemons && tipos) {
+      dispatch(getPokemons(pokemons));
+      dispatch(getTipos(tipos));
+      setAlert({ ...alert, Loading: false });
+      console.log('Cargados')
+    } else {
+      setAlert({
+        Alert: <Alert message={'Error en conexion con el servidor'} type={'danger'} />,
+        Loading: false
+      });
+    }
   }
 
   const onClick = (orden) => {
@@ -96,9 +112,15 @@ export default function Home(props) {
       });
       setPokemones(filtro);
       if (filtro.length === 0) {
-        setAlert({ ...alert, Alert: true });
+        setAlert({
+          ...alert,
+          Alert: <Alert message={'No se encontraron Pokemons de tipo: ' + tipo} type={'warning'} />
+        });
       } else {
-        setAlert({ ...alert, Alert: false });
+        setAlert({
+          ...alert,
+          Alert: ''
+        });
       }
     } else if (!creados && tipo === 'Todos') {
       setPokemones(pok);
@@ -113,9 +135,15 @@ export default function Home(props) {
       });
       setPokemones(filtro);
       if (filtro.length === 0) {
-        setAlert({ ...alert, Alert: true });
+        setAlert({
+          ...alert,
+          Alert: <Alert message={'No se encontraron Pokemons de tipo: ' + tipo} type={'warning'} />
+        });
       } else {
-        setAlert({ ...alert, Alert: false });
+        setAlert({
+          ...alert,
+          Alert: ''
+        });
       }
     } else if (!creados && tipo !== 'Todos') {
       const filtro = pok.filter((p) => {
@@ -126,9 +154,15 @@ export default function Home(props) {
       });
       setPokemones(filtro);
       if (filtro.length === 0) {
-        setAlert({ ...alert, Alert: true });
+        setAlert({
+          ...alert,
+          Alert: <Alert message={'No se encontraron Pokemons de tipo: ' + tipo} type={'warning'} />
+        });
       } else {
-        setAlert({ ...alert, Alert: false });
+        setAlert({
+          ...alert,
+          Alert: ''
+        });
       }
     }
   }
@@ -139,7 +173,10 @@ export default function Home(props) {
       setPokemones([search]);
     } else {
       console.log('Pokemon no Encontrado')
-      setAlert({ ...alert, Alert: true });
+      setAlert({ 
+        ...alert,
+         Alert: <Alert message={'No se encontraro el Pokemon: ' + name } type={'warning'} />  
+        });
     }
   }
 
@@ -168,7 +205,8 @@ export default function Home(props) {
       {
         alert.Alert ?
           <div className='Alerta'>
-            <Alert message={'No se encontraron Pokemons'} type={'warning'} />
+            {alert.Alert}
+            {/* <Alert message={'No se encontraron Pokemons'} type={'warning'} /> */}
           </div>
           : <Cards pokemons={pokemones} />
       }

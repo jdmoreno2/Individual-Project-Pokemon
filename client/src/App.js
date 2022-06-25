@@ -4,6 +4,7 @@ import Home from './pages/Home/Home'
 import Details from './pages/Details/Details'
 import Create from './pages/Create/Create'
 import Nav from './components/Nav/Nav'
+import NotFound from './pages/Not Found/NoFound'
 import { useDispatch } from 'react-redux';
 import { getPokemons, getTipos } from './Reducer/actions';
 import axios from 'axios';
@@ -14,13 +15,23 @@ function App() {
   const dispatch = useDispatch();
 
   async function get(url) {
-    const poke = await axios.get(url);
-    return poke.data;
+    const poke = await axios.get(url).catch(e => {
+      console.log(e.message)
+    });
+    if (poke) {
+      return poke.data;
+    }else{
+      return undefined;
+    }
   }
 
   const Carga = async () => {
-    dispatch(getPokemons(await get('http://localhost:3001/pokemons')));
-    dispatch(getTipos(await get('http://localhost:3001/types')));
+    const pokemons = await get('http://localhost:3001/pokemons');
+    const tipos = await get('http://localhost:3001/types');
+    if (pokemons && tipos) {
+      dispatch(getPokemons(pokemons));
+      dispatch(getTipos(tipos));
+    }
   }
 
   Carga();
@@ -40,6 +51,7 @@ function App() {
         <Nav />
         <Details />
       </Route>
+      <Route component={NotFound} />
     </Switch>
   );
 }

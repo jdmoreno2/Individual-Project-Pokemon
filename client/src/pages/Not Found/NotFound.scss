@@ -1,0 +1,33 @@
+.NotFound {
+  background: linear-gradient(to right, #ee3271, #6b6b83, #4eb7c7);
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  line-height: 10px;
+  .container {
+    backdrop-filter: blur(10px);
+    text-align: center;
+    h1 {
+      font-size: 300px;
+    }
+    h2{
+      font-size: 80px;
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .NotFound{
+    .container{
+     h1{
+      font-size: 150px;
+     }
+     h2{
+      font-size: 40px;
+     }
+    }
+  }
+}

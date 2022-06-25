@@ -8,7 +8,16 @@ export default function Create() {
   const dispatch = useDispatch();
   async function get(url, data) {
     try {
-      const poke = await axios.post(url, data)
+      let error = '';
+      const poke = await axios.post(url, data).catch(e => {
+        console.log(e.message)
+        error = e.message
+      });
+      if (poke) {
+        return poke.data;
+      } else {
+        return undefined;
+      };
       return poke.data;
     } catch (error) {
       console.log('Error: ' + error.response)

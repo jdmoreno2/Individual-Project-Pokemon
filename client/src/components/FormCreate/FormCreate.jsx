@@ -93,7 +93,7 @@ export default function Form({ onSubmit }) {
     console.log(alert)
     console.log('Aqui')
     const { nombre, vida, fuerza, defensa, velocidad, altura, peso, tipo, imagen } = input;
-    if (nombre != '' && vida !== '' && fuerza !== '' && defensa !== ''
+    if (nombre !== '' && vida !== '' && fuerza !== '' && defensa !== ''
       && velocidad !== '' && altura !== '' && peso !== '' && tipo.length != 0 && imagen !== '') {
         if (onSubmit(formData)) {
           setAlert(<Alert message={'Pokemon Creado'} type={'success'} />)
