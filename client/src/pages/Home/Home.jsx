@@ -39,7 +39,7 @@ export default function Home(props) {
     if (pokemons && tipos) {
       dispatch(getPokemons(pokemons));
       dispatch(getTipos(tipos));
-      setAlert({ ...alert, Loading: false });
+      setAlert({ Alert: false, Loading: false });
       console.log('Cargados')
     } else {
       setAlert({
@@ -114,7 +114,7 @@ export default function Home(props) {
       if (filtro.length === 0) {
         setAlert({
           ...alert,
-          Alert: <Alert message={'No se encontraron Pokemons de tipo: ' + tipo} type={'warning'} />
+          Alert: <Alert message={'No se encontraron Pokemons Creados de tipo: ' + tipo} type={'warning'} />
         });
       } else {
         setAlert({
@@ -137,7 +137,7 @@ export default function Home(props) {
       if (filtro.length === 0) {
         setAlert({
           ...alert,
-          Alert: <Alert message={'No se encontraron Pokemons de tipo: ' + tipo} type={'warning'} />
+          Alert: <Alert message={'No se encontraron Pokemons Creados de tipo: ' + tipo} type={'warning'} />
         });
       } else {
         setAlert({
@@ -171,6 +171,10 @@ export default function Home(props) {
     const search = await get(`http://localhost:3001/pokemons?name=${name}`);
     if (search) {
       setPokemones([search]);
+      setAlert({ 
+        ...alert,
+         Alert: false
+        });
     } else {
       console.log('Pokemon no Encontrado')
       setAlert({ 
