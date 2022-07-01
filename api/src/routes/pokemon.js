@@ -36,7 +36,7 @@ router.get('/', async (req, res, next) => {
     });
     let pokemones = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=40');
     let salida = await consultas(pokemones);
-    res.json(salida.concat(pokemons));
+    res.status(200).json(salida.concat(pokemons));
   } catch (error) {
     res.status(500).send('Error en el servidor ' + error);
   }
@@ -129,13 +129,13 @@ router.post('/', upload.single('imagen'), async (req, res, next) => {
       velocidad,
       altura,
       peso,
-      imagen: DOMAIN + PORT + '/uploads/' + imagen.filename
+      imagen: imagen.path
     })
     await tipo.map(async tip => {
       await pokemon.addTipos(tip);
     })
-    const tipos = await Promise.all( tipo.map(async tip => {
-      return await Tipo.findOne({where : {id : tip} });
+    const tipos = await Promise.all(tipo.map(async tip => {
+      return await Tipo.findOne({ where: { id: tip } });
     }));
     return res.status(201).json({ id: pokemon.id, nombre: pokemon.nombre, imagen: pokemon.imagen, fuerza: pokemon.fuerza, tipos: tipos });
   } catch (error) {
