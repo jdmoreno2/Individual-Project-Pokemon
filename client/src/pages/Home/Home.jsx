@@ -124,6 +124,10 @@ export default function Home(props) {
       }
     } else if (!creados && tipo === 'Todos') {
       setPokemones(pok);
+      setAlert({
+        ...alert,
+        Alert: ''
+      });
     } else if (creados && tipo !== 'Todos') {
       const filtro = pok.filter((p) => {
         if (p.id[0] === '0') {

@@ -115,7 +115,7 @@ router.get('/', async (req, res, next) => {
 router.post('/', upload.single('imagen'), async (req, res, next) => {
   const { nombre, vida, fuerza, defensa, velocidad, altura, peso, tipo } = req.body;
   const imagen = req.file;
-  // console.log(imagen)
+  console.log(imagen)
   if (!nombre || !vida || !fuerza || !defensa || !velocidad || !altura || !peso || !tipo || !imagen) return res.status(400).send('Faltan datos necesarios');
   if (isNaN(parseInt(vida)) || isNaN(parseInt(fuerza)) || isNaN(parseInt(velocidad)) || isNaN(parseInt(altura)) || isNaN(parseInt(peso)) || !isNaN(parseInt(nombre))) {
     return res.status(400).send('Formato de datos invalido');
@@ -130,6 +130,8 @@ router.post('/', upload.single('imagen'), async (req, res, next) => {
       altura,
       peso,
       imagen: imagen.path
+    }).catch ((e) => {
+      console.log('Aquiiiiiiii - '+e)
     })
     await tipo.map(async tip => {
       await pokemon.addTipos(tip);
@@ -139,6 +141,7 @@ router.post('/', upload.single('imagen'), async (req, res, next) => {
     }));
     return res.status(201).json({ id: pokemon.id, nombre: pokemon.nombre, imagen: pokemon.imagen, fuerza: pokemon.fuerza, tipos: tipos });
   } catch (error) {
+    console.log(error)
     return res.status(400).send('Error: ' + error);
   }
 

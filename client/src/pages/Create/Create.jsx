@@ -18,7 +18,6 @@ export default function Create() {
       } else {
         return undefined;
       };
-      return poke.data;
     } catch (error) {
       console.log('Error: ' + error.response)
     }
