@@ -8,6 +8,7 @@ import NotFound from './pages/Not Found/NoFound'
 import { useDispatch } from 'react-redux';
 import { getPokemons, getTipos } from './Reducer/actions';
 import axios from 'axios';
+const { POKEMONS_URL_API } = import.meta.env;
 
 import './App.css';
 
@@ -26,8 +27,8 @@ function App() {
   }
 
   const Carga = async () => {
-    const pokemons = await get('http://localhost:3001/pokemons');
-    const tipos = await get('http://localhost:3001/types');
+    const pokemons = await get(POKEMONS_URL_API+'/pokemons');
+    const tipos = await get(POKEMONS_URL_API+'/types');
     if (pokemons && tipos) {
       dispatch(getPokemons(pokemons));
       dispatch(getTipos(tipos));

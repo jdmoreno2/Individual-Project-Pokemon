@@ -6,6 +6,7 @@ import { getPokemosDetails } from '../../Reducer/actions';
 import Alert from '../../components/Alert/Alert';
 import Spinner from '../../components/Spinner/Spinner';
 import './Details.scss';
+const { POKEMONS_URL_API } = import.meta.env;
 
 export default function Details(props) {
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ export default function Details(props) {
 
   const carga = async () => {
     setAlert({ ...alert, Loading: true });
-    const pokemon = await get(`http://localhost:3001/pokemons/${id}`);
+    const pokemon = await get(`${POKEMONS_URL_API}/pokemons/${id}`);
     if (typeof pokemon === 'string') {
       if (pokemon.includes('404')) {
         setAlert({
