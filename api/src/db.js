@@ -1,14 +1,16 @@
 require('dotenv').config();
+const pg = require('pg');
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const {
   DB_USER, DB_PASSWORD, DB_HOST, DATABASE_URL
 } = process.env;
-
+console.log("DATABASE_URL: "+DATABASE_URL)
 const sequelize = new Sequelize(
   DATABASE_URL || `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/pokemon`,
   {
+    dialectModule: pg,
     dialectOptions: {
       ssl: {
         require: true, // This will help you. But you will see nwe error
