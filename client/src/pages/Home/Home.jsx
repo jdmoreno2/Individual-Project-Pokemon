@@ -10,7 +10,7 @@ import { getPokemons, getTipos } from '../../Reducer/actions';
 import axios from "axios";
 import './Home.scss';
 // const { POKEMONS_URL_API } = import.meta.env;
-const { POKEMONS_URL_API } = process.env;
+const { REACT_APP_BACK } = process.env;
 
 
 export default function Home(props) {
@@ -36,8 +36,8 @@ export default function Home(props) {
 
   const Carga = async () => {
     setAlert({ ...alert, Loading: true });
-    const pokemons = await get(POKEMONS_URL_API+'/pokemons');
-    const tipos = await get(POKEMONS_URL_API+'/types');
+    const pokemons = await get(REACT_APP_BACK+'/pokemons');
+    const tipos = await get(REACT_APP_BACK+'/types');
     if (pokemons && tipos) {
       dispatch(getPokemons(pokemons));
       dispatch(getTipos(tipos));
@@ -174,7 +174,7 @@ export default function Home(props) {
   }
 
   const onClickSearch = async (name) => {
-    const search = await get(`${POKEMONS_URL_API}/pokemons?name=${name}`);
+    const search = await get(`${REACT_APP_BACK}/pokemons?name=${name}`);
     if (search) {
       setPokemones([search]);
       setAlert({ 

@@ -3,7 +3,7 @@ import FormCreate from '../../components/FormCreate/FormCreate';
 import './Create.scss'
 import { createPokemon } from '../../Reducer/actions'
 import axios from 'axios';
-const { POKEMONS_URL_API } = process.env;
+const { REACT_APP_BACK } = process.env;
 // const { POKEMONS_URL_API } = import.meta.env;
 
 export default function Create() {
@@ -25,7 +25,7 @@ export default function Create() {
     }
   }
   const onSubmit = async (data) => {
-    const create = await get(POKEMONS_URL_API+'/pokemons', data);
+    const create = await get(REACT_APP_BACK+'/pokemons', data);
     console.log(create);
     if (create) {
       dispatch(createPokemon(create))

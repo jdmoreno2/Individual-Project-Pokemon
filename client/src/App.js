@@ -11,8 +11,8 @@ import axios from 'axios';
 // const { POKEMONS_URL_API } = import.meta.env;
 import './App.css';
 require('dotenv').config()
-const { POKEMONS_URL_API}  = process.env;
-console.log("URL: "+POKEMONS_URL_API)
+const { REACT_APP_BACK } = process.env;
+console.log("URL: " + process.env.REACT_APP_BACK)
 
 function App() {
   const dispatch = useDispatch();
@@ -23,14 +23,14 @@ function App() {
     });
     if (poke) {
       return poke.data;
-    }else{
+    } else {
       return undefined;
     }
   }
 
   const Carga = async () => {
-    const pokemons = await get(POKEMONS_URL_API+'/pokemons');
-    const tipos = await get(POKEMONS_URL_API+'/types');
+    const pokemons = await get(REACT_APP_BACK + '/pokemons');
+    const tipos = await get(REACT_APP_BACK + '/types');
     if (pokemons && tipos) {
       dispatch(getPokemons(pokemons));
       dispatch(getTipos(tipos));

@@ -7,7 +7,7 @@ import Alert from '../../components/Alert/Alert';
 import Spinner from '../../components/Spinner/Spinner';
 import './Details.scss';
 require('dotenv').config()
-const { POKEMONS_URL_API } = process.env.NODE_ENV;
+const { REACT_APP_BACK } = process.env;
 
 
 export default function Details(props) {
@@ -34,7 +34,7 @@ export default function Details(props) {
 
   const carga = async () => {
     setAlert({ ...alert, Loading: true });
-    const pokemon = await get(`${POKEMONS_URL_API}/pokemons/${id}`);
+    const pokemon = await get(`${REACT_APP_BACK}/pokemons/${id}`);
     if (typeof pokemon === 'string') {
       if (pokemon.includes('404')) {
         setAlert({
