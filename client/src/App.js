@@ -8,9 +8,11 @@ import NotFound from './pages/Not Found/NoFound'
 import { useDispatch } from 'react-redux';
 import { getPokemons, getTipos } from './Reducer/actions';
 import axios from 'axios';
-const { POKEMONS_URL_API } = import.meta.env;
-
+// const { POKEMONS_URL_API } = import.meta.env;
 import './App.css';
+require('dotenv').config()
+const { POKEMONS_URL_API}  = process.env;
+console.log("URL: "+POKEMONS_URL_API)
 
 function App() {
   const dispatch = useDispatch();

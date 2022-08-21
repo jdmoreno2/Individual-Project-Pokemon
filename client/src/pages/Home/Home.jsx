@@ -8,9 +8,10 @@ import Alert from '../../components/Alert/Alert';
 import { useDispatch, useSelector } from "react-redux";
 import { getPokemons, getTipos } from '../../Reducer/actions';
 import axios from "axios";
-const { POKEMONS_URL_API } = import.meta.env;
+import './Home.scss';
+// const { POKEMONS_URL_API } = import.meta.env;
+const { POKEMONS_URL_API } = process.env;
 
-import './Home.scss'
 
 export default function Home(props) {
   const dispatch = useDispatch();

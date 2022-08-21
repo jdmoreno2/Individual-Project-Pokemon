@@ -6,7 +6,9 @@ import { getPokemosDetails } from '../../Reducer/actions';
 import Alert from '../../components/Alert/Alert';
 import Spinner from '../../components/Spinner/Spinner';
 import './Details.scss';
-const { POKEMONS_URL_API } = import.meta.env;
+require('dotenv').config()
+const { POKEMONS_URL_API } = process.env.NODE_ENV;
+
 
 export default function Details(props) {
   const dispatch = useDispatch();

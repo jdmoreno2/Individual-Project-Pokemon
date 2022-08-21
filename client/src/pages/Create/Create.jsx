@@ -3,7 +3,8 @@ import FormCreate from '../../components/FormCreate/FormCreate';
 import './Create.scss'
 import { createPokemon } from '../../Reducer/actions'
 import axios from 'axios';
-const { POKEMONS_URL_API } = import.meta.env;
+const { POKEMONS_URL_API } = process.env;
+// const { POKEMONS_URL_API } = import.meta.env;
 
 export default function Create() {
   const dispatch = useDispatch();

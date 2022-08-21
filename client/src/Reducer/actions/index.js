@@ -19,19 +19,6 @@ export function getPokemons(payload) {
   }
 }
 
-// export function getPokemons() {
-//   return function(dispatch) {
-//     return fetch('http://localhost:3001/pokemons')
-//     .then(response => response.json())
-//     .then(json => {
-//       dispatch({
-//         type: GET_POKEMONS,
-//         payload: json
-//       })
-//     });
-//   }
-// }
-
 export function getPokemosByName(payload) {
   return {
     type : GET_POKEMON_BY_NAME,
@@ -52,16 +39,3 @@ export function getTipos(payload) {
     payload
   }
 }
-
-// export function getTipos() {
-//   return function(dispatch) {
-//     return fetch('http://localhost:3001/types')
-//     .then(response => response.json())
-//     .then(json => {
-//       dispatch({
-//         type: GET_POKEMONS,
-//         payload: json
-//       })
-//     });
-//   }
-// }
