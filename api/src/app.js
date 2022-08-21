@@ -7,6 +7,7 @@ const routes = require('./routes/index.js');
 const storage = require('./libs/storage');
 require('./db.js');
 const { WEB_APP_URL } = process.env;
+console.log(WEB_APP_URL)
 const server = express();
 
 server.name = 'API';
